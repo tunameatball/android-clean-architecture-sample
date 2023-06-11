@@ -1,6 +1,7 @@
 package com.kkh.data.di.module
 
 import com.kkh.data.common.BASE_URL
+import com.kkh.data.di.manager.remote.NetworkCallAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,9 +29,10 @@ object NetworkModule {
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addCallAdapterFactory(NetworkCallAdapter.Factory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
     }
-    
+
 }
