@@ -1,10 +1,13 @@
 package com.kkh.data.di.module
 
+import android.content.Context
 import com.kkh.data.common.BASE_URL
+import com.kkh.data.di.manager.remote.AppInterceptor
 import com.kkh.data.di.manager.remote.NetworkCallAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,8 +21,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(appInterceptor: AppInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(appInterceptor)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
@@ -35,4 +39,9 @@ object NetworkModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun provideAppInterceptor(@ApplicationContext context: Context): AppInterceptor {
+        return AppInterceptor(context)
+    }
 }
