@@ -4,6 +4,7 @@ build/
 
 # Local configuration file (sdk path, etc)
 local.properties
+data/src/main/res/values/api_keys.xml
 
 # Log/OS Files
 *.log
