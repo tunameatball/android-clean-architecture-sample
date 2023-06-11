@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -34,8 +36,15 @@ android {
 
 dependencies {
 
-    implementation project(path : ':domain')
-    implementation project(path : ':data')
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
+    def coroutineVersion = "1.6.4"
+    def hiltVersion = "2.45"
+    def lifecycleVersion = "2.6.1"
+    def pagingVersion = "3.1.1"
+    def navigationVersion = "2.5.3"
+    def retrofitVersion = "2.9.0"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -44,4 +53,35 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
+
+    // android coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+
+    // kotlin view
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    // ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycleVersion"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    // gson
+    implementation "com.google.code.gson:gson:$retrofitVersion"
+    // logging
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 }
