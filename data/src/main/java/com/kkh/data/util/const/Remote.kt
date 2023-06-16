@@ -3,6 +3,7 @@ package com.kkh.data.util.const
 const val NETWORK_RSPN_200 = 200
 
 const val NETWORK_RSPN_400 = 400
+const val NETWORK_RSPN_401 = 401
 const val NETWORK_RSPN_402 = 402
 const val NETWORK_RSPN_403 = 403
 const val NETWORK_RSPN_404 = 404
