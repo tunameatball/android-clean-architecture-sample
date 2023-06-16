@@ -4,5 +4,5 @@ import com.kkh.domain.model.Movie
 
 interface MovieRepository {
 
-    fun getMovies(query: String): List<Movie>
+    suspend fun getMovies(query: String): List<Movie>
 }
