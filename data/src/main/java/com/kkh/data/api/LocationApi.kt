@@ -1,5 +1,7 @@
 package com.kkh.data.api
 
+import com.kkh.data.di.manager.remote.NetworkResponse
+import com.kkh.data.model.LocationResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,5 +11,5 @@ interface LocationApi {
     suspend fun getLocation(
         @Query("query") query: String,
         @Query("display") display: Int = 5
-    )
+    ): NetworkResponse<LocationResponse>
 }
