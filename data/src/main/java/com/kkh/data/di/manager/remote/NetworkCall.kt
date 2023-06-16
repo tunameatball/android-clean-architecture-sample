@@ -1,7 +1,9 @@
 package com.kkh.data.di.manager.remote
 
+import android.util.Log
 import com.kkh.data.util.const.NETWORK_RSPN_200
 import com.kkh.data.util.const.NETWORK_RSPN_400
+import com.kkh.data.util.const.NETWORK_RSPN_401
 import com.kkh.data.util.const.NETWORK_RSPN_402
 import com.kkh.data.util.const.NETWORK_RSPN_403
 import com.kkh.data.util.const.NETWORK_RSPN_404
@@ -17,11 +19,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class NetworkCall<T : Any>(private val call: Call<T>, private val apiInfo: APIInfo) :
+class NetworkCall<T : Any>(private val call: Call<T>, private val apiInfo: APIInfo? = null) :
     Call<NetworkResponse<T>> {
     override fun enqueue(callback: Callback<NetworkResponse<T>>) {
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
+
+                Log.e("call enqueue", "call api")
+
                 when (response.code()) {
                     NETWORK_RSPN_200 -> {
                         if (response.isSuccessful) {
@@ -40,6 +45,7 @@ class NetworkCall<T : Any>(private val call: Call<T>, private val apiInfo: APIIn
                     }
 
                     NETWORK_RSPN_400,
+                    NETWORK_RSPN_401,
                     NETWORK_RSPN_402,
                     NETWORK_RSPN_403,
                     NETWORK_RSPN_404 -> {
