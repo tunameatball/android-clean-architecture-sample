@@ -10,13 +10,13 @@ sealed class NetworkResponse<out T : Any>(
     data class Success<T : Any>(override val apiInfo: APIInfo, override val body: T? = null) :
         NetworkResponse<T>(apiInfo, body)
 
-    data class Failure<T : Any>(override val apiInfo: APIInfo, val code: Int, val error: String) :
-        NetworkResponse<T>(apiInfo)
+    data class Failure(override val apiInfo: APIInfo, val code: Int, val error: String) :
+        NetworkResponse<Nothing>(apiInfo)
 
     data class ReturnError(override val apiInfo: APIInfo) : NetworkResponse<Nothing>(apiInfo)
 
-    data class ResultError<T : Any>(override val apiInfo: APIInfo, val errorBody: String?) :
-        NetworkResponse<T>(apiInfo)
+    data class ResultError(override val apiInfo: APIInfo, val errorBody: String?) :
+        NetworkResponse<Nothing>(apiInfo)
 
     data class NetworkError(override val apiInfo: APIInfo, val error: IOException) :
         NetworkResponse<Nothing>(apiInfo)
