@@ -1,7 +1,6 @@
 package com.kkh.data.repository.location
 
 import android.util.Log
-import com.kkh.data.di.manager.remote.NetworkResponse
 import com.kkh.data.mapper.toLocation
 import com.kkh.data.repository.location.remote.LocationRemoteDataSource
 import com.kkh.domain.model.Location
@@ -14,12 +13,15 @@ class LocationRepositoryImpl @Inject constructor(
 
     override suspend fun getLocation(query: String): List<Location> {
         Log.i("LocationRepositoryImpl", "getLocation")
-        return when (val result = locationRemoteDataSource.getLocations(query)) {
-            is NetworkResponse.Success -> {
-                result.body?.items?.map { it.toLocation() }.orEmpty()
-            }
-
-            else -> emptyList<Location>()
-        }
+//        return when (val result = locationRemoteDataSource.getLocations(query)) {
+//            is NetworkResponse.Success -> {
+//                result.body?.items?.map { it.toLocation() }.orEmpty()
+//            }
+//
+//            else -> emptyList<Location>()
+//        }
+        return locationRemoteDataSource.getLocations(query)?.items?.map {
+            it.toLocation()
+        } ?: emptyList()
     }
 }

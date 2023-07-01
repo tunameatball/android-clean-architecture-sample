@@ -27,7 +27,7 @@ sealed class NetworkResponse<out T : Any>(
 
 data class APIInfo(
     val api: Int,
-    val jsonObject: JsonObject,
-    val string: String?,
+    val jsonObject: JsonObject? = null,
+    val string: String? = null,
     val uri: String? = null
 )

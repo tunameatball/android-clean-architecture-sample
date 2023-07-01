@@ -26,3 +26,5 @@ const val BASE_URL = ""
  ********************************************************/
 const val API_USER_LOGIN = 1
 const val API_USER_REGISTER = 2
+
+const val API_GET_LOCATION = 3
